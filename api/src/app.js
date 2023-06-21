@@ -1,3 +1,9 @@
+//* app.js
+//? VA A CREAR AL SERVIDOR server
+//? CONTIENE MIDDLEWARES (bodyParser, cookieParser, morgan, personalizado)
+//? REDIRECCIONA A routes ('./routes/index.js')
+//* EN CASO DE ERROR --> MANDA ERROR 500
+
 const express = require('express');
 const cookieParser = require('cookie-parser');
 const bodyParser = require('body-parser');

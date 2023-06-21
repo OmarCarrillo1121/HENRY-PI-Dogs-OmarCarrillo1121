@@ -1,13 +1,13 @@
+// EN ESTE MODULO SE CREA LA CONEXION CON LA BASE DE DATOS,
+// SE DEFINEN Y SE RELACIONAN LOS MODELOS
 require('dotenv').config();
 const { Sequelize } = require('sequelize');
 const fs = require('fs');
 const path = require('path');
-const {
-  DB_USER, DB_PASSWORD, DB_HOST,
-} = process.env;
+const { DB_USER, DB_PASSWORD, DB_HOST } = process.env;
 
 const sequelize = new Sequelize(`postgres://${DB_USER}:${DB_PASSWORD}@${DB_HOST}/dogs`, {
-  logging: false, // set to console.log to see the raw SQL queries
+  logging: false, // DESACTIVA LA INFO QUE APARECE EN LA CONSOLA CADA VEZ QUE SINCRONIZAMOS LA DB 
   native: false, // lets Sequelize know we can use pg-native for ~30% more speed
 });
 const basename = path.basename(__filename);
@@ -31,11 +31,12 @@ sequelize.models = Object.fromEntries(capsEntries);
 // En sequelize.models están todos los modelos importados como propiedades
 // Para relacionarlos hacemos un destructuring
 const { Dog } = sequelize.models;
+console.log ( sequelize.models ) 
 
 // Aca vendrian las relaciones
 // Product.hasMany(Reviews);
 
 module.exports = {
   ...sequelize.models, // para poder importar los modelos así: const { Product, User } = require('./db.js');
-  conn: sequelize,     // para importart la conexión { conn } = require('./db.js');
+  conn: sequelize,     // para importar la conexión { conn } = require('./db.js');
 };
